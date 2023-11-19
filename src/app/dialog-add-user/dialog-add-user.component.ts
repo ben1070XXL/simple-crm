@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import { User } from 'src/models/user.class';
 
 @Component({
@@ -9,16 +10,26 @@ import { User } from 'src/models/user.class';
 export class DialogAddUserComponent {
   user = new User();
   birthDate!: Date;
+  firestore: Firestore = inject(Firestore);
 
   constructor() {}
 
-  saveUser() {
+  async saveUser() {
     this.user.birthdate =  this.birthDate.getTime();
     console.log('Current user is: ', this.user);
+
+    await addDoc(this.getUsersRef(), this.user.toJson()).then((result: any) => {
+      console.log('Added new User: ', result);
+    });
+
   }
 
   onNoClick() {
     
+  }
+
+  getUsersRef() {
+    return collection(this.firestore, 'users');
   }
 
 }
