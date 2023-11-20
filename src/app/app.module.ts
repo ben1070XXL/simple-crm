@@ -13,10 +13,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
-import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -42,11 +43,14 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
     FormsModule,
     provideFirebaseApp(() => initializeApp({"projectId":"simple-crm-3ec31","appId":"1:263340883108:web:5bd0f31395cdd78e8efa31","storageBucket":"simple-crm-3ec31.appspot.com","apiKey":"AIzaSyCAgoiHv4_HT9Weq2HNdacOn4TgmqPNyCQ","authDomain":"simple-crm-3ec31.firebaseapp.com","messagingSenderId":"263340883108"})),
     provideFirestore(() => getFirestore())
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

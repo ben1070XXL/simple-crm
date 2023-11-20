@@ -10,16 +10,19 @@ import { User } from 'src/models/user.class';
 export class DialogAddUserComponent {
   user = new User();
   birthDate!: Date;
+  loading = false;
   firestore: Firestore = inject(Firestore);
 
   constructor() {}
 
   async saveUser() {
+    this.loading=true;
     this.user.birthdate =  this.birthDate.getTime();
     console.log('Current user is: ', this.user);
 
     await addDoc(this.getUsersRef(), this.user.toJson()).then((result: any) => {
       console.log('Added new User: ', result);
+      this.loading = false;
     });
 
   }
