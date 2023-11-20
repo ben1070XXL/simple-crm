@@ -28,11 +28,24 @@ export class UserComponent implements OnInit, OnDestroy {
       this.allUsers = [];
 
       users.forEach((user) => {
-        this.allUsers.push(user.data());
+        this.allUsers.push(this.setUserObject(user.data(), user.id));
       })
 
       console.log('Current Users: ', this.allUsers);
     });
+  }
+
+  setUserObject(obj: any, id: string) {
+    return {
+      id: id || "",
+      firstname: obj.firstname || "",
+      lastname:  obj.lastname || "",
+      email:  obj.email || "",
+      birthdate:  obj.birthdate || "",
+      street:  obj.street || "",
+      zipCode:  obj.zipCode || "",
+      city:  obj.city || ""
+    }
   }
 
   openDialog() {
