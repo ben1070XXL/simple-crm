@@ -50,7 +50,8 @@ export class UserDetailComponent implements OnInit,OnDestroy {
   }
 
   editMenu() {
-    this.dialog.open(DialogEditAddressComponent);
+    const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.componentInstance.user = this.user;
   }
 
   editUserDetail(){
@@ -60,6 +61,6 @@ export class UserDetailComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.unsubUser();
   }
-
+  
 }
 
